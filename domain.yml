@@ -1,0 +1,30 @@
+version: "3.1"
+
+intents:
+  - nlu_fallback  # Triggers ChatGPT fallback
+  - transfer_money
+
+entities:
+  - recipient
+  - amount
+
+slots:
+  recipient:
+    type: text
+    mappings:
+      - type: from_llm
+  amount:
+    type: float
+    mappings:
+      - type: from_llm
+
+responses:
+  utter_default:
+    - text: ""  # Empty to prevent double messages
+
+actions:
+  - action_fallback_chatgpt
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

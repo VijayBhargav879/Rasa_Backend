@@ -1,0 +1,5 @@
+patterns:
+  - name: fallback_chatgpt
+    intent: nlu_fallback
+    steps:
+      - action: action_fallback_chatgpt
