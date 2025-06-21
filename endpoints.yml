@@ -1,5 +1,5 @@
 action_endpoint:
-  url: "http://localhost:5055/webhook"
+  url: "http://action-server:5055/webhook"
 
 nlg:
   type: rephrase
@@ -9,6 +9,6 @@ nlg:
 model_groups:
   - id: rasa_command_generation_model
     models:
-      - provider: rasa
-        model: rasa/cmd_gen_codellama_13b_calm_demo
-        api_base: "https://tutorial-llm.rasa.ai"
+      - provider: openai
+        model: gpt-4
+        api_key: ${OPENAI_API_KEY}

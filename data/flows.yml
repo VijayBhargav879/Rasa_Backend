@@ -1,5 +1,0 @@
-flows:
-  default_conversation:
-    description: Route all inputs to fallback ChatGPT
-    steps:
-      - action: action_fallback_chatgpt

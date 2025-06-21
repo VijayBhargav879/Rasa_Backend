@@ -15,10 +15,12 @@ class ActionFallbackChatGPT(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
         user_input = tracker.latest_message.get("text")
+
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 temperature=0.5,
                 messages=[
                     {"role": "system", "content": "You are a helpful and accurate assistant for renewable energy awareness."},
@@ -26,8 +28,11 @@ class ActionFallbackChatGPT(Action):
                 ]
             )
             reply = response.choices[0].message.content.strip()
-        except Exception:
-            reply = ""
+
+        except Exception as e:
+            print("🔴 OpenAI ERROR:", e)
+            reply = "Sorry, I'm having trouble reaching the assistant right now. Please try again shortly."
+
         print("🔵 Sending to ChatGPT:", user_input)
         print("🟢 ChatGPT reply:", reply)
         dispatcher.utter_message(text=reply)
